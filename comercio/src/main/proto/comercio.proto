@@ -7,14 +7,26 @@ option objc_class_prefix = "HLW";
 
 package com.softwalter.comercio;
 
+import "google/api/annotations.proto";
+
 service ComercioService {
-  rpc send (ComercioRequest) returns (ComercioReply) {}
+  rpc create (ProductRequest) returns (ProductResponse) {
+    option (google.api.http) = {
+      post: "/v1/product"
+      body: "*"
+    };
+  }
 }
 
-message ComercioRequest {
-  string name = 1;
+message ProductRequest {
+  string product_id = 1;
+  string name = 2;
+  string product_brand = 3; // marca do produto
+  string outfitter = 4;     // fornecedor
+  int64 price = 5;         // preço
+  int64 sale_price = 6;    //preço de venda
 }
 
-message ComercioReply {
+message ProductResponse {
   string message = 1;
 }
