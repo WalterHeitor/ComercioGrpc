@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.softwalter.comercio";
+option java_outer_classname = "Comercio";
+option objc_class_prefix = "HLW";
+
+package com.softwalter.comercio;
+
+service ComercioService {
+  rpc send (ComercioRequest) returns (ComercioReply) {}
+}
+
+message ComercioRequest {
+  string name = 1;
+}
+
+message ComercioReply {
+  string message = 1;
+}

@@ -1,0 +1,6 @@
+applicationType: grpc
+defaultPackage: com.softwalter.comercio
+testFramework: junit
+sourceLanguage: kotlin
+buildTool: gradle
+features: [annotation-api, app-name, aws-v2-sdk, gradle, grpc, junit, kotlin, kotlin-application, kotlin-extension-functions, logback, readme, shade, yaml]
