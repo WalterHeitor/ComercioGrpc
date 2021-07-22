@@ -35,6 +35,14 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
 //    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
+    // https://mvnrepository.com/artifact/software.amazon.awssdk/dynamodb
+    implementation group: 'software.amazon.awssdk', name: 'dynamodb', version: '2.16.100'
+    // https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb *** este e o correto do repository ***
+    implementation group: 'com.amazonaws', name: 'aws-java-sdk-dynamodb', version: '1.12.24'
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+
+
     runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
 
