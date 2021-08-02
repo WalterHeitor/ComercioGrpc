@@ -1,11 +1,10 @@
-package com.softwalter.comercio.adapter.comerciodb.config.table
+package com.softwalter.comercio.adapter.comerciodb.config.moviesdb
 
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.amazonaws.services.dynamodbv2.document.PutItemOutcome
 import com.amazonaws.services.dynamodbv2.document.Table
 import org.slf4j.Logger
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 class MoviesItemOps01 {
 }

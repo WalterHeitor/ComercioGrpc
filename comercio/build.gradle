@@ -69,6 +69,14 @@ application {
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
 }
+shadowJar {
+    zip64 true
+//    mergeServiceFiles()
+//    exclude "META-INF/*.SF"
+//    exclude 'META-INF/*.DSA'
+//    exclude 'META-INF/*.RSA'
+//    exclude "LICENSE*"
+}
 
 tasks {
     compileKotlin {

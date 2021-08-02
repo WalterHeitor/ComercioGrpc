@@ -1,5 +1,7 @@
-package com.softwalter.comercio.adapter.comerciodb.config.table
+package com.softwalter.comercio.adapter.comerciodb.config.moviesdb
 
+import com.amazonaws.AmazonClientException
+import com.amazonaws.AmazonServiceException
 import com.amazonaws.services.dynamodbv2.document.DynamoDB
 import com.amazonaws.services.dynamodbv2.document.Table
 import com.amazonaws.services.dynamodbv2.document.UpdateItemOutcome
@@ -37,11 +39,28 @@ fun main(){
     try {
         logger.info("Atualizando o item ...")
         val outcome: UpdateItemOutcome = table.updateItem(updateItemSpec)
-        logger.info("Atualizado com sucesso ... : ${outcome.item.toJSONPretty()}")
-    }catch (e: Exception){
-        logger.error("Incapaz de ler o item: $year, $title ")
-        logger.error("Messagem : ${e.message}")
+        logger.info("Atualizado com sucesso com incremento ... : ${outcome.item.toJSONPretty()}")
     }
+    //    catch (e: Exception){
+//        logger.info("Erro ao cria a Tabela ...")
+//        logger.info("Menssagem: ${e.message}")
+//    }
+    catch (ase: AmazonServiceException, ){
+        logger.error("Operacao nao completada")
+        logger.error("Menssagem: ${ase.message}")
+        logger.error("Mensagem de erro: ${ase.statusCode}")
+        logger.error("Status HTTP: ${ase.errorCode}")
+        logger.error("Erro codigo AWS: ${ase.errorType}")
+        logger.error("ID da requiscao: ${ase.errorMessage}")
+    }
+    catch (ace: AmazonClientException){
+        logger.error("Erro interno ocorrido na comunicação do DynamoDB")
+        logger.error("Mensagem de erro ${ace.message}")
+        logger.error("Mensagem de erro local ${ace.localizedMessage.toString()}")
+        logger.error("Mensagem de causa de erro ${ace.cause}")
+        logger.error("Mensagem de erro stack trace ${ace.stackTrace}")
+    }
+
 
 
 }
