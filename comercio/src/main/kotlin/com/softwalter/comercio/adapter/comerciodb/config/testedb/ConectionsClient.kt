@@ -1,4 +1,4 @@
-package com.softwalter.comercio.adapter.comerciodb.config.comertciodb
+package com.softwalter.comercio.adapter.comerciodb.config.testedb
 
 
 import com.amazonaws.AmazonClientException
@@ -71,6 +71,14 @@ fun chavesDB(): Triple<String, String, String> {
 fun dynamoDBConnection(): Pair<Logger, DynamoDB> {
     val awsRegion: String = US_East_2.name
     val logger: Logger = LoggerFactory.getLogger(CreateTable::class.java)
+    val clientBuilder: AmazonDynamoDB = amazonDynamoDB(awsRegion)
+    val client = DynamoDB(clientBuilder)
+    val results: TableCollection<ListTablesResult> = client.listTables()
+    logger.info("Listagem de Tabelas existentes ... ${results.forEach { it.tableName.toString() }}")
+    return Pair(logger, client)
+}
+
+fun amazonDynamoDB(awsRegion: String): AmazonDynamoDB {
     val clientBuilder: AmazonDynamoDB = AmazonDynamoDBClientBuilder
         .standard()
         //.withRegion(AWS_REGION)
@@ -87,8 +95,5 @@ fun dynamoDBConnection(): Pair<Logger, DynamoDB> {
             )
         )
         .build()
-    val client = DynamoDB(clientBuilder)
-    val results: TableCollection<ListTablesResult> = client.listTables()
-    logger.info("Listagem de Tabelas existentes ... ${results.forEach { it.tableName.toString() }}")
-    return Pair(logger, client)
+    return clientBuilder
 }
