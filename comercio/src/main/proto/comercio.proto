@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.softwalter.comercio";
 option java_outer_classname = "Comercio";
-option objc_class_prefix = "HLW";
+option objc_class_prefix = "WHFO";
 
 package com.softwalter.comercio;
 
@@ -23,10 +23,15 @@ message ProductRequest {
   string name = 2;
   string product_brand = 3; // marca do produto
   string outfitter = 4;     // fornecedor
-  int64 price = 5;         // preço
-  int64 sale_price = 6;    //preço de venda
+  double price = 5;         // preço
+  double sale_price = 6;    //preço de venda
 }
 
 message ProductResponse {
-  string message = 1;
+  string product_id = 1;
+  string name = 2;
+  string product_brand = 3; // marca do produto
+  string outfitter = 4;     // fornecedor
+  double price = 5;         // preço
+  double sale_price = 6;
 }
