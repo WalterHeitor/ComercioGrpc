@@ -3,7 +3,7 @@ package com.softwalter.comercio.adapter.treino2.input
 
 import com.softwalter.comercio.ProductRequest
 import com.sofwalter.adapter.db.ProductEntidade
-import com.sofwalter.adapter.db.ProductRepository
+import com.softwalter.comercio.adapter.treino2.db.ProductRepository
 import com.softwalter.comercio.adapter.treino2.domaim.Product
 import com.sofwalter.adapter.service.ProductGateway
 import org.slf4j.LoggerFactory

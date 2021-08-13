@@ -1,20 +1,26 @@
 version: '3.8'
 services:
   dynamodb-local:
-    command: "-jar DynamoDBLocal.jar -sharedDb -optimizeDbBeforeStartup -dbPath ./data" #-optimizeDbBeforeStartup -dbPath ./data
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
     image: "amazon/dynamodb-local:latest"
     container_name: dynamodb-local
     ports:
       - "8002:8000"
     volumes:
       - "./docker/dynamodb:/home/dynamodblocal/data"
-#    environment:
-#      AWS_ACCESS_KEY_ID: fakeMyAccessKeyId
-#      AWS_SECRET_ACCESS_KEY: fakeSecretAccessKe
-#      AWS_REGION: us-east-2
     working_dir: /home/dynamodblocal
-    networks:
-      - network
+  app-node:
+    depends_on:
+      - dynamodb-local
+    image: banst/awscli
+    container_name: app-node
+    ports:
+      - "8080:8080"
+    environment:
+      AWS_ACCESS_KEY_ID: 'fakeMyAccessKeyId'
+      AWS_SECRET_ACCESS_KEY: 'fakeSecretAccessKe'
+    command:
+      dynamodb describe-limits --endpoint-url http://dynamodb-local:8002 --region us-west-2
   app:
     image: comercio
     build:
@@ -24,7 +30,6 @@ services:
     depends_on:
       - "dynamodb-local"
     ports:
-      - "8080:8080"
       - "50051:50051"
       - "5005:5005"
     environment:
@@ -35,9 +40,4 @@ services:
       ADDCITIONAL_OPTS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -Xmx1G -Xms128m -XX:MaxMetaspaceSize=128m
     command:
       dynamodb describe-limits --endpoint-url http://dynamodb-local:8002 --region us-west-2
-    networks:
-      - network
 
-networks:
-  network:
-    driver: bridge

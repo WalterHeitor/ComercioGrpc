@@ -1,9 +1,10 @@
-package com.sofwalter.adapter.db
+package com.softwalter.comercio.adapter.treino2.db
 
 import com.amazonaws.AmazonClientException
 import com.amazonaws.AmazonServiceException
 import com.softwalter.comercio.adapter.treino2.domaim.ConnectionDynamoDB
 import com.softwalter.comercio.adapter.treino2.domaim.Product
+import com.sofwalter.adapter.db.ProductEntidade
 import org.slf4j.LoggerFactory
 import javax.inject.Singleton
 
@@ -17,14 +18,14 @@ class ProductRepository(
         try {
             logger.info("Iniciando a conexao")
             dynamoDBMapper.tableConnection().save(productEntidade)
-            logger.info("dymanoDBMapper ${dynamoDBMapper}")
+            logger.info("dymanoDBMapper $dynamoDBMapper")
             return productEntidade.toProduct()
         }
-//        catch (e: Exception){
-//        logger.info("Erro ao inserirdado na Tabela ...")
-//        logger.info("Menssagem: ${e.message}")
-//            throw Exception()
-//    }
+        catch (e: Exception){
+        logger.info("Erro ao inserirdado na Tabela ...")
+        logger.info("Menssagem: ${e.message}")
+            throw Exception()
+    }
         catch (ase: AmazonServiceException, ){
             logger.error("Operacao nao completada")
             logger.error("Menssagem: ${ase.message}")
